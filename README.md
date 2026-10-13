@@ -1,8 +1,8 @@
-# Angular Portfólio 2
+# brunonyland.com
 
-[![CI](https://github.com/BrunoNyland/angular_portifolio2/actions/workflows/github-pages.yml/badge.svg)](https://github.com/BrunoNyland/angular_portifolio2/actions/workflows/github-pages.yml)
-[![Deploy](https://img.shields.io/badge/GitHub%20Pages-live-brightgreen)](https://brunonyland.github.io/angular_portifolio2/)
-[![Coverage](https://codecov.io/gh/BrunoNyland/angular_portifolio2/branch/main/graph/badge.svg)](https://codecov.io/gh/BrunoNyland/angular_portifolio2)
+[![CI](https://github.com/BrunoNyland/brunonyland.com/actions/workflows/ci.yml/badge.svg)](https://github.com/BrunoNyland/brunonyland.com/actions/workflows/ci.yml)
+[![Site](https://img.shields.io/badge/site-brunonyland.com-brightgreen)](https://brunonyland.com/)
+[![Coverage](https://codecov.io/gh/BrunoNyland/brunonyland.com/branch/main/graph/badge.svg)](https://codecov.io/gh/BrunoNyland/brunonyland.com)
 
 Portfólio pessoal desenvolvido com Angular para apresentar perfil profissional, experiência, projetos selecionados, stack e formas de contato. A interface combina animações com GSAP, navegação suave com Lenis e uma cena de fundo em 3D.
 
@@ -35,7 +35,7 @@ Depois disso, abra `http://localhost:4200/`.
 
 - `npm start`: inicia o servidor de desenvolvimento.
 - `npm run build`: gera a versão de produção em `dist/`.
-- `npm run build:pages`: gera o build pronto para GitHub Pages com base em `/angular_portifolio2/`.
+- `npm run deploy`: publica em https://brunonyland.com (roda `tools/deploy.sh` na VPS).
 - `npm run format`: formata o código com Prettier.
 - `npm run format:check`: verifica se o código está formatado.
 - `npm run lint`: roda o ESLint nos arquivos TypeScript.
@@ -48,7 +48,7 @@ Depois disso, abra `http://localhost:4200/`.
 
 ## CI/CD
 
-O repositório agora contém um workflow em `.github/workflows/github-pages.yml` que roda verificação de formatação, lint, testes e cobertura em pull requests, envia a cobertura para o Codecov e faz deploy automático para GitHub Pages quando há push na branch `main`.
+O workflow em `.github/workflows/ci.yml` roda verificação de formatação, lint, testes, cobertura e build em cada push na `main` e em pull requests, e envia a cobertura para o Codecov. A publicação em https://brunonyland.com é feita pelo `tools/deploy.sh`, na VPS; o deploy no GitHub Pages foi desligado.
 
 Se o repositório for privado, é preciso configurar o `CODECOV_TOKEN` nas secrets do GitHub antes do upload funcionar.
 

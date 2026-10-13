@@ -1,0 +1,45 @@
+name: CI
+
+# Só verificação. O site é publicado em https://brunonyland.com pelo
+# tools/deploy.sh, na VPS; o deploy no GitHub Pages foi desligado quando o
+# repositório passou a se chamar brunonyland.com.
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check formatting, lint and tests
+        run: npm run check
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          files: ./coverage/lcov.info
+          fail_ci_if_error: true
+
+      - name: Build
+        run: npm run build

@@ -7,7 +7,7 @@
 set -euo pipefail
 
 # ─── Config ──────────────────────────────────────────────────────────────
-REPO_DIR="/projects/angular_portifolio2"
+REPO_DIR="/projects/brunonyland.com"
 DEPLOY_DIR="/var/www/brunonyland.com"
 DIST_DIR="$REPO_DIR/dist/portifolio2/browser"
 NGINX_SVC="nginx"

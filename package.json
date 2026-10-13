@@ -5,7 +5,6 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build && node tools/compress.mjs",
-    "build:pages": "ng build --configuration production --base-href /angular_portifolio2/ --deploy-url /angular_portifolio2/ && node tools/compress.mjs",
     "compress": "node tools/compress.mjs",
     "deploy": "bash tools/deploy.sh",
     "deploy:dry": "bash tools/deploy.sh --dry-run",
