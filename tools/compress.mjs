@@ -8,7 +8,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const projectRoot = resolve(__dirname, '..');
 
 // Diretório de saída do build (pode ser sobrescrito via argv: `node compress.mjs <dir>`)
-const outDir = resolve(projectRoot, process.argv[2] || 'dist/portifolio2');
+const outDir = resolve(projectRoot, process.argv[2] || 'dist/brunonyland.com');
 
 // Extensões que valem comprimir (textos/binários comprimíveis)
 const COMPRESSIBLE_EXT = new Set([

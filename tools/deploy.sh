@@ -9,7 +9,7 @@ set -euo pipefail
 # ─── Config ──────────────────────────────────────────────────────────────
 REPO_DIR="/projects/brunonyland.com"
 DEPLOY_DIR="/var/www/brunonyland.com"
-DIST_DIR="$REPO_DIR/dist/portifolio2/browser"
+DIST_DIR="$REPO_DIR/dist/brunonyland.com/browser"
 NGINX_SVC="nginx"
 DRY_RUN=0
 

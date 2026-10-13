@@ -7,7 +7,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "portifolio2": {
+    "brunonyland.com": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -65,10 +65,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "portifolio2:build:production"
+              "buildTarget": "brunonyland.com:build:production"
             },
             "development": {
-              "buildTarget": "portifolio2:build:development"
+              "buildTarget": "brunonyland.com:build:development"
             }
           },
           "defaultConfiguration": "development"
