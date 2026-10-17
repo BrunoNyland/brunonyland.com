@@ -58,4 +58,25 @@ describe('TweaksService', () => {
 
     expect(document.documentElement.style.getPropertyValue('--accent')).toBe('#abcdef');
   });
+
+  it('patches multiple tweaks and toggles #cursor display', () => {
+    const cursorEl = document.createElement('div');
+    cursorEl.id = 'cursor';
+    document.body.appendChild(cursorEl);
+
+    configure(new FakeStorage());
+    const service = TestBed.inject(TweaksService);
+
+    service.patch({ cursor: false, particles: 200 });
+    TestBed.tick();
+    expect(service.tweaks().cursor).toBe(false);
+    expect(service.tweaks().particles).toBe(200);
+    expect(cursorEl.style.display).toBe('none');
+
+    service.patch({ cursor: true });
+    TestBed.tick();
+    expect(cursorEl.style.display).toBe('');
+
+    cursorEl.remove();
+  });
 });

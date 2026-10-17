@@ -20,6 +20,22 @@ describe('StorageService', () => {
     it('returns null for missing keys', () => {
       expect(TestBed.inject(StorageService).get('missing')).toBeNull();
     });
+
+    it('gracefully handles localStorage exceptions in get and set', () => {
+      const storage = TestBed.inject(StorageService);
+      const getSpy = vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
+        throw new Error('SecurityError');
+      });
+      const setSpy = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+        throw new Error('QuotaExceededError');
+      });
+
+      expect(storage.get('k')).toBeNull();
+      expect(() => storage.set('k', 'v')).not.toThrow();
+
+      getSpy.mockRestore();
+      setSpy.mockRestore();
+    });
   });
 
   describe('on the server', () => {

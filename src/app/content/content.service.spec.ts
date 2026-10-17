@@ -47,11 +47,13 @@ describe('ContentService', () => {
     expect(TestBed.inject(DOCUMENT).documentElement.lang).toBe('en');
   });
 
-  it('toggles between languages', () => {
+  it('toggles between languages and updates dict()', () => {
     configure(new FakeStorage());
     const service = TestBed.inject(ContentService);
+    expect(service.dict().nav.about).toBe('Sobre');
     service.toggleLang();
     expect(service.lang()).toBe('en');
+    expect(service.dict().nav.about).toBe('About');
     service.toggleLang();
     expect(service.lang()).toBe('pt');
   });

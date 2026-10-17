@@ -61,5 +61,22 @@ describe('SeoService', () => {
 
     const xDefault = doc.head.querySelector('link[rel="alternate"][hreflang="x-default"]');
     expect(xDefault?.getAttribute('href')).toContain('/pt-path');
+
+    // Calling setMeta again updates existing <link> elements in place and handles en-only fallback
+    seo.setMeta(() => ({ title: 'T2', desc: 'D2' }), { en: '/en-only' });
+    TestBed.tick();
+    expect(canonical?.getAttribute('href')).toBeDefined();
+    expect(xDefault?.getAttribute('href')).toContain('/en-only');
+  });
+
+  it('does nothing before setMeta is called and falls back to location pathname when alternates are omitted', () => {
+    const { seo, doc } = setup();
+    TestBed.tick(); // effect runs with source() === null
+
+    seo.setMeta(() => ({ title: 'Plain', desc: 'Desc' }));
+    TestBed.tick();
+
+    const canonical = doc.head.querySelector('link[rel="canonical"]');
+    expect(canonical?.getAttribute('href')).toBeDefined();
   });
 });

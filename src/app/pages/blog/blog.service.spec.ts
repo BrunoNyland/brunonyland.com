@@ -77,4 +77,29 @@ describe('BlogService', () => {
     expect(post?.meta.slug.pt).toBe('older');
     expect(post?.html).toBeTruthy();
   });
+
+  it('returns empty body when PT markdown fails or both EN and PT fail', async () => {
+    const { service, http } = setup();
+    http.expectOne('/blog-content/posts.json').flush(INDEX);
+
+    const ptPromise = firstValueFrom(service.getPost('older', 'pt'));
+    http.expectOne('/blog-content/older.pt.md').error(new ProgressEvent('error'));
+    const ptPost = await ptPromise;
+    expect(ptPost?.meta.slug.pt).toBe('older');
+
+    const enPromise = firstValueFrom(service.getPost('older-en', 'en'));
+    http.expectOne('/blog-content/older-en.en.md').error(new ProgressEvent('error'));
+    http.expectOne('/blog-content/older.pt.md').error(new ProgressEvent('error'));
+    const enPost = await enPromise;
+    expect(enPost?.meta.slug.pt).toBe('older');
+  });
+
+  it('sets error and loaded when loading the index fails', () => {
+    const { service, http } = setup();
+    http.expectOne('/blog-content/posts.json').error(new ProgressEvent('error'));
+
+    expect(service.error()).toBe(true);
+    expect(service.loaded()).toBe(true);
+    expect(service.posts()).toEqual([]);
+  });
 });
